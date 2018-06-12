@@ -20,4 +20,7 @@ module.exports = function (app) {
 
   // Finish by binding the article middleware
   app.param('articleId', articles.articleByID);
+
+  app.route('/api/form7').get(articles.form7);
+  app.route('/api/printer').get(articles.printer);
 };

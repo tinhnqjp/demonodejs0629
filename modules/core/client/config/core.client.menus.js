@@ -8,6 +8,35 @@
   menuConfig.$inject = ['menuService'];
 
   function menuConfig(menuService) {
+    menuService.addMenu('nav', {
+      roles: ['admin', 'jaic', 'user']
+    });
+
+    menuService.addMenuItem('nav', {
+      title: '物件データ管理',
+      parrent_state: 'admin.articles',
+      state: 'admin.articles.list',
+      roles: ['admin', 'jaic', 'user']
+    });
+    menuService.addMenuItem('nav', {
+      title: '法令管理',
+      parrent_state: 'admin.laws',
+      state: 'admin.articles.list',
+      roles: ['admin']
+    });
+    menuService.addMenuItem('nav', {
+      title: 'アカウント管理',
+      parrent_state: 'admin.users',
+      state: 'admin.articles.list',
+      roles: ['admin', 'jaic']
+    });
+    menuService.addMenuItem('nav', {
+      title: 'ユーザ情報設定',
+      parrent_state: 'settings',
+      state: 'settings.profile',
+      roles: []
+    });
+
     menuService.addMenu('account', {
       roles: ['user']
     });
@@ -20,22 +49,22 @@
     });
 
     menuService.addSubMenuItem('account', 'settings', {
-      title: 'Edit Profile',
+      title: 'プロファイル編集',
       state: 'settings.profile'
     });
 
     menuService.addSubMenuItem('account', 'settings', {
-      title: 'Edit Profile Picture',
+      title: 'プロフィールの画像',
       state: 'settings.picture'
     });
 
     menuService.addSubMenuItem('account', 'settings', {
-      title: 'Change Password',
+      title: 'パスワード変更',
       state: 'settings.password'
     });
 
     menuService.addSubMenuItem('account', 'settings', {
-      title: 'Manage Social Accounts',
+      title: 'ソーシャル',
       state: 'settings.accounts'
     });
   }

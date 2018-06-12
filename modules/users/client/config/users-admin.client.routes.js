@@ -11,42 +11,59 @@
   function routeConfig($stateProvider) {
     $stateProvider
       .state('admin.users', {
+        abstract: true,
         url: '/users',
+        template: '<ui-view/>'
+      })
+      .state('admin.users.list', {
+        url: '',
         templateUrl: '/modules/users/client/views/admin/list-users.client.view.html',
         controller: 'UserListController',
-        controllerAs: 'vm'
-      })
-      .state('admin.user', {
-        url: '/users/:userId',
-        templateUrl: '/modules/users/client/views/admin/view-user.client.view.html',
-        controller: 'UserController',
         controllerAs: 'vm',
-        resolve: {
-          userResolve: getUser
-        },
         data: {
-          pageTitle: '{{ userResolve.displayName }}'
+          roles: ['admin', 'jaic'],
+          pageTitle: 'アカウント管理'
         }
       })
-      .state('admin.user-edit', {
-        url: '/users/:userId/edit',
+      .state('admin.users.create', {
+        url: '/create',
+        templateUrl: '/modules/users/client/views/authentication/signup.client.view.html',
+        controller: 'AuthenticationController',
+        controllerAs: 'vm',
+        data: {
+          roles: ['admin', 'jaic'],
+          pageTitle: 'アカウント登録'
+        },
+        resolve: {
+          userResolve: newUser
+        }
+      })
+      .state('admin.users.edit', {
+        url: '/:userId/edit',
         templateUrl: '/modules/users/client/views/admin/edit-user.client.view.html',
         controller: 'UserController',
         controllerAs: 'vm',
+        data: {
+          roles: ['admin', 'jaic'],
+          pageTitle: 'アカウント登録'
+        },
         resolve: {
           userResolve: getUser
-        },
-        data: {
-          pageTitle: '{{ userResolve.displayName }}'
         }
       });
 
-    getUser.$inject = ['$stateParams', 'AdminService'];
+    getUser.$inject = ['$stateParams', 'UsersAdminService'];
 
-    function getUser($stateParams, AdminService) {
-      return AdminService.get({
+    function getUser($stateParams, UsersAdminService) {
+      return UsersAdminService.get({
         userId: $stateParams.userId
       }).$promise;
+    }
+
+    newUser.$inject = ['UsersAdminService'];
+
+    function newUser(UsersAdminService) {
+      return new UsersAdminService();
     }
   }
 }());

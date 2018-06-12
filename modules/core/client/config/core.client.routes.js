@@ -27,9 +27,14 @@
     });
 
     $stateProvider
+      // .state('home', {
+      //   url: '/',
+      //   templateUrl: '/modules/core/client/views/home.client.view.html',
+      //   controller: 'HomeController',
+      //   controllerAs: 'vm'
+      // })
       .state('home', {
         url: '/',
-        templateUrl: '/modules/core/client/views/home.client.view.html',
         controller: 'HomeController',
         controllerAs: 'vm'
       })

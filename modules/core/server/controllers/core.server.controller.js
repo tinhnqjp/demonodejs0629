@@ -9,6 +9,7 @@ var validator = require('validator'),
  */
 exports.renderIndex = function (req, res) {
   var safeUserObject = null;
+  var isLogin = false;
   if (req.user) {
     safeUserObject = {
       displayName: validator.escape(req.user.displayName),
@@ -17,14 +18,15 @@ exports.renderIndex = function (req, res) {
       created: req.user.created.toString(),
       roles: req.user.roles,
       profileImageURL: req.user.profileImageURL,
-      email: validator.escape(req.user.email),
       lastName: validator.escape(req.user.lastName),
       firstName: validator.escape(req.user.firstName),
       additionalProvidersData: req.user.additionalProvidersData
     };
+    isLogin = true;
   }
 
   res.render('modules/core/server/views/index', {
+    isLogin: isLogin,
     user: JSON.stringify(safeUserObject),
     sharedConfig: JSON.stringify(config.shared)
   });
@@ -35,7 +37,7 @@ exports.renderIndex = function (req, res) {
  */
 exports.renderServerError = function (req, res) {
   res.status(500).render('modules/core/server/views/500', {
-    error: 'Oops! Something went wrong...'
+    error: 'システム管理者にお問い合わせください。'
   });
 };
 
@@ -53,11 +55,11 @@ exports.renderNotFound = function (req, res) {
     },
     'application/json': function () {
       res.json({
-        error: 'Path not found'
+        error: 'パスが見つかりません'
       });
     },
     'default': function () {
-      res.send('Path not found');
+      res.send('パスが見つかりません');
     }
   });
 };

@@ -1,26 +1,60 @@
-﻿<section>
-  <div class="page-header">
-    <h1>
-      Articles
-      <a class="btn btn-primary pull-right" data-ui-sref="admin.articles.create">
-        <i class="glyphicon glyphicon-plus"></i>
-      </a>
-    </h1>
+﻿<div class="w3-container">
+  <h3>物件データ管理</h3>
+  <a class="w3-button w3-green pull-right" id="btnAdd" data-ui-sref="admin.articles.create">
+    <span class="glyphicon glyphicon-plus"></span> 登録
+  </a>
+  <a class="w3-button w3-blue pull-right mg15r" ng-if="vm.user.roles[0] !== 'user'" data-ui-sref="admin.properties.import">
+    <i class="glyphicon glyphicon-allow-down"></i> NICE選択</a>
+  <ol class="breadcrumb">
+    <li>
+      <a href="#">一覧</a>
+    </li>
+    <li class="active">物件登録</li>
+  </ol>
+  <hr>
+  <form name="vm.form.importSearchForm" ng-submit="vm.search(vm.form.importSearchForm.$valid)" autocomplete="on" novalidate>
+    <div class="w3-row">
+      <div class="w3-col s5 m4 l3">
+        <input type="text" class="w3-input w3-border" id="keyword" ng-model="vm.keyword" placeholder="キーワード" autofocus>
+      </div>
+      <div class="w3-col s2 m1 l1">
+        <button type="submit" class="w3-button w3-teal">
+          <span ng-if="!vm.busyLoad" class="glyphicon glyphicon-search"></span>
+          <span ng-if="vm.busyLoad" class="fa fa-spinner fa-spin"></span>
+          探索</button>
+      </div>
+    </div>
+    <hr>
+  </form>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th class="bg-primary">＃</th>
+          <th class="bg-primary">受付日</th>
+          <th class="bg-primary">事前受付番号</th>
+          <th class="bg-primary">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-ng-repeat="article in vm.articles">
+          <td class="w3-center">1</td>
+          <td class="w3-left-align" data-ng-bind="article.title | date:'yyyy/MM/dd'"></td>
+          <td class="w3-left-align" data-ng-bind="article.created | date:'yyyy/MM/dd'"></td>
+          <td  class="w3-center" style="width: 170px">
+            <button class="w3-button w3-blue w3-small" data-ui-sref="admin.articles.edit({articleId: article._id})">
+              <i class="glyphicon glyphicon-pencil"></i> 編集</button>
+            <button class="w3-button w3-red w3-small" ng-click="vm.remove(article)">
+              <i class="glyphicon glyphicon-trash"></i> 削除</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  <div class="list-group">
-    <a data-ng-repeat="article in vm.articles" data-ui-sref="admin.articles.edit({articleId: article._id})" class="list-group-item">
-      <small class="list-group-item-text">
-        Posted on
-        <span data-ng-bind="article.created | date:'mediumDate'"></span>
-        by
-        <span ng-if="article.user" ng-bind="article.user.displayName"></span>
-        <span ng-if="!article.user">Deleted User</span>
-      </small>
-      <h4 class="list-group-item-heading" data-ng-bind="article.title"></h4>
-      <p class="list-group-item-text" data-ng-bind="article.content"></p>
-    </a>
+
+  <div class="w3-center">
+    <hr>
+    <ul uib-pagination total-items="vm.totalItems" items-per-page="vm.pageSize" previous-text="前" next-text="次" ng-model="vm.currentPage"
+      ng-click="vm.pageChanged()"></ul>
   </div>
-  <div class="alert alert-warning text-center" data-ng-if="vm.articles.$resolved && !vm.articles.length">
-    No articles yet, why don't you <a data-ui-sref="admin.articles.create">create one</a>?
-  </div>
-</section>
+</div>

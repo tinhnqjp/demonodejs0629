@@ -8,12 +8,20 @@ module.exports = {
       css: [
         // bower:css
         'public/lib/bootstrap/dist/css/bootstrap.css',
-        'public/lib/bootstrap/dist/css/bootstrap-theme.css',
-        'public/lib/angular-ui-notification/dist/angular-ui-notification.css'
+        // 'public/lib/bootstrap/dist/css/bootstrap-theme.css',
+        'public/lib/angular-ui-notification/dist/angular-ui-notification.css',
         // endbower
+        'public/common/css/w3.css',
+        'public/common/css/w3-theme-teal.css',
+        'public/lib/font-awesome/web-fonts-with-css/css/fontawesome.css',
+        'public/lib/angular-loading-bar/src/loading-bar.css',
+        'public/lib//ng-dialog/css/ngDialog.min.css',
+        'public/lib//ng-dialog/css/ngDialog-theme-default.min.css',
+        'public/common/css/common.css'
       ],
       js: [
         // bower:js
+        'public/lib/jquery/dist/jquery.min.js',
         'public/lib/angular/angular.js',
         'public/lib/angular-animate/angular-animate.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
@@ -25,6 +33,12 @@ module.exports = {
         'public/lib/angular-ui-router/release/angular-ui-router.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         // endbower
+        'public/common/js/common.js',
+        'public/lib/jquery-ui/jquery-ui.min.js',
+        'public/lib/angular-ui-sortable/sortable.min.js',
+        'public/lib/underscore/underscore.js',
+        'public/lib/angular-loading-bar/src/loading-bar.js',
+        'public/lib/ng-dialog/js/ngDialog.min.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },
