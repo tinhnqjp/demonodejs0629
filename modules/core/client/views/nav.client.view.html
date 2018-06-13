@@ -1,13 +1,12 @@
-<nav ng-controller="HeaderController as vm" class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;" id="mySidebar">
+<nav ng-controller="HeaderController as vm" class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" id="mySidebar">
     <a class="w3-bar-item w3-button w3-border-bottom w3-large" ui-sref="home">
-    <img src="/modules/core/client/img/brand/logo.png" style="width:80%;"></a>
-    <a class="w3-bar-item w3-button w3-hide-large w3-large" href="javascript:void(0)" onclick="w3_close()"><i class="fa fa-remove"></i></a>
+    <img src="/modules/core/client/img/brand/logo.png"></a>
     
     <a ng-repeat="subitem in vm.navMenu.items" 
     ng-if="(subitem.roles | contains:vm.authentication.user.roles[0])" ng-class="{ 'w3-teal': $state.includes(subitem.parrent_state) }" 
     class="w3-bar-item w3-button {{item.class}}" ui-sref="{{subitem.state}}">{{ subitem.title }}</a>
-    <a class="w3-bar-item w3-button" ng-show="vm.authentication.user" href="/api/auth/signout" target="_self" style="color:red">
-        ログアウト　<span style="color:black; font-size: 70%">({{ vm.authentication.user.username }})</span>
+    <a class="w3-bar-item w3-button logout" ng-show="vm.authentication.user" href="/api/auth/signout" target="_self">
+        ログアウト　<span class="username">({{ vm.authentication.user.username }})</span>
     </a>
-
 </nav>
+<div class="w3-overlay" onclick="w3_close()" style="cursor:pointer"></div>

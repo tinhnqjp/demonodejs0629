@@ -1,11 +1,11 @@
-<div id="loginbox" style="margin-top:10%;" class=" col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-  <form name="vm.userForm" ng-submit="vm.signin(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
-    <div class="panel panel-info">
+<div id="loginbox" class="mg200t w3-display-topmiddle">
+  <form name="vm.userForm" ng-submit="vm.signin(vm.userForm.$valid)" novalidate autocomplete="off">
+    <div class="panel panel-primary">
         <div class="panel-heading">
             <div class="panel-title">ログイン</div>
         </div>
-        <div style="padding:30px" class="panel-body">
-            <div class="row">
+        <div class="pd30t panel-body">
+            <div>
                 <div id="err_msg" class="err_msg alert alert-danger col-sm-12 hidden">
                     <strong>エラー:</strong>
                     <span id="err_msg_desc">エラーメッセージ</span>
@@ -14,15 +14,15 @@
                   <span ng-bind="vm.error"></span>
                 </uib-alert>
             </div>
-            <div class="row">
-                <div style="margin-bottom:25px" class="input-group" show-errors>
+            <div>
+                <div class="mg20b input-group" show-errors>
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                     <input id="usernameOrEmail" name="usernameOrEmail" type="text" class="form-control" ng-model="vm.credentials.usernameOrEmail" placeholder="ユーザーID">
                     <div ng-messages="vm.userForm.usernameOrEmail.$error" role="alert">
                       <p class="help-block error-text" ng-message="required">ユーザーID又はメールを入力してください。</p>
                     </div>
                 </div>
-                <div style="margin-bottom:25px" class="input-group" show-errors>
+                <div class="mg20b input-group" show-errors>
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                     <input id="password" name="password" type="password" class="form-control" ng-model="vm.credentials.password" placeholder="パスワード">
                     <div ng-messages="vm.userForm.password.$error" role="alert">
@@ -30,9 +30,9 @@
                     </div>
                 </div>
 
-                <div style="margin-top:10px" class="form-group">
+                <div class="mg10b form-group">
                     <div class="col-sm-12 controls">
-                        <button type="submit" class="btn btn-success pull-right">ログイン</button>
+                        <button type="submit" class="w3-button w3-green pull-right pull-right">ログイン</button>
                     </div>
                 </div>
             </div>

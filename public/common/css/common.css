@@ -208,3 +208,46 @@ body {
 .w3-main-login {
     min-height: 86%;
 }
+
+.breadcrumb {
+    background-color: inherit !important;
+}
+
+a.w3-button:hover {
+    text-decoration: none;
+}
+
+#loginbox {
+    max-width: 500px;
+}
+
+#mySidebar {
+    z-index:3;
+    width:250px;
+}
+#mySidebar img{
+    width:80%;
+}
+#mySidebar .username {
+    color:black; font-size: 70%;
+}
+#mySidebar .logout {
+    color:red;
+}
+#mySidebar .w3-bar-item {
+    padding: 16px;
+    font-weight: bold
+}
+
+.w3-button.button-search {
+    padding: 9px 16px;
+}
+
+#moveTop {
+    position: fixed;
+    text-align: center;
+    bottom: 40px;
+    right: 10px;
+    z-index: 100000;
+    cursor: pointer;
+}

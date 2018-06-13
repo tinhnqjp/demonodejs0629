@@ -15,7 +15,6 @@
     vm.isCollapsed = false;
     vm.menu = menuService.getMenu('topbar');
     vm.navMenu = menuService.getMenu('nav');
-    console.log('​HeaderController -> navMenu', vm.navMenu);
 
     $scope.$state = $state;
     $scope.$on('$stateChangeSuccess', stateChangeSuccess);

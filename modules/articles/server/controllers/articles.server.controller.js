@@ -86,18 +86,60 @@ exports.delete = function (req, res) {
 };
 
 /**
- * List of Articles
+ * copy an article
  */
-exports.list = function (req, res) {
-  Article.find().sort('-created').populate('user', 'displayName').exec(function (err, articles) {
+exports.copy = function (req, res) {
+  var article = req.article;
+  var newArticle = new Article();
+  _.extend(newArticle, {
+    title: article.title + ' - コピー',
+    content: article.content
+  });
+  newArticle.save(function (err) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.json(articles);
+      res.json(newArticle);
     }
   });
+};
+
+/**
+ * List of Articles
+ */
+exports.list = function (req, res) {
+  var limit = Number(req.query.limit) || 10;
+  var page = Number(req.query.page) || 1;
+  var keyword = req.query.keyword || null;
+  var condition = {};
+  if (keyword) {
+    var regex = new RegExp(keyword.trim(), 'i');
+    condition = { $or: [
+      { 'title': regex },
+      { 'content': regex }
+    ] };
+  }
+
+  Article.find(condition)
+    .skip((limit * page) - limit)
+    .limit(limit)
+    .sort('-created').populate('user', 'displayName').exec(function (err, articles) {
+      Article.count(condition).exec(function (err, count) {
+        if (err) {
+          return res.status(422).send({
+            message: errorHandler.getErrorMessage(err)
+          });
+        } else {
+          res.json({
+            laws: articles,
+            current: page,
+            total: count
+          });
+        }
+      });
+    });
 };
 
 /**

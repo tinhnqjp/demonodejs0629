@@ -4,21 +4,19 @@
     <span class="glyphicon glyphicon-plus"></span> 登録
   </a>
   <a class="w3-button w3-blue pull-right mg15r" ng-if="vm.user.roles[0] !== 'user'" data-ui-sref="admin.properties.import">
-    <i class="glyphicon glyphicon-allow-down"></i> NICE選択</a>
+    <i class="glyphicon glyphicon-allow-down"></i> NICE選択
+  </a>
   <ol class="breadcrumb">
-    <li>
-      <a href="#">一覧</a>
-    </li>
-    <li class="active">物件登録</li>
+    <li class="active">一覧</li>
   </ol>
   <hr>
-  <form name="vm.form.importSearchForm" ng-submit="vm.search(vm.form.importSearchForm.$valid)" autocomplete="on" novalidate>
+  <form name="vm.form.searchForm" ng-submit="vm.search()" autocomplete="on" novalidate>
     <div class="w3-row">
       <div class="w3-col s5 m4 l3">
         <input type="text" class="w3-input w3-border" id="keyword" ng-model="vm.keyword" placeholder="キーワード" autofocus>
       </div>
       <div class="w3-col s2 m1 l1">
-        <button type="submit" class="w3-button w3-teal">
+        <button type="submit" class="w3-button w3-teal button-search">
           <span ng-if="!vm.busyLoad" class="glyphicon glyphicon-search"></span>
           <span ng-if="vm.busyLoad" class="fa fa-spinner fa-spin"></span>
           探索</button>
@@ -30,20 +28,22 @@
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th class="bg-primary">＃</th>
-          <th class="bg-primary">受付日</th>
-          <th class="bg-primary">事前受付番号</th>
-          <th class="bg-primary">操作</th>
+          <th class="w3-theme w3-center">＃</th>
+          <th class="w3-theme w3-center">受付日</th>
+          <th class="w3-theme w3-center">事前受付番号</th>
+          <th class="w3-theme w3-center">操作</th>
         </tr>
       </thead>
       <tbody>
-        <tr data-ng-repeat="article in vm.articles">
-          <td class="w3-center">1</td>
-          <td class="w3-left-align" data-ng-bind="article.title | date:'yyyy/MM/dd'"></td>
-          <td class="w3-left-align" data-ng-bind="article.created | date:'yyyy/MM/dd'"></td>
-          <td  class="w3-center" style="width: 170px">
+        <tr data-ng-repeat="article in vm.articles track by $index">
+          <td class="w3-center">{{ vm.offset + $index + 1 }}</td>
+          <td class="w3-left-align" data-ng-bind="article.title"></td>
+          <td class="w3-center" data-ng-bind="article.created | date:'yyyy/MM/dd'"></td>
+          <td  class="w3-center" style="width: 270px">
             <button class="w3-button w3-blue w3-small" data-ui-sref="admin.articles.edit({articleId: article._id})">
               <i class="glyphicon glyphicon-pencil"></i> 編集</button>
+            <button class="w3-button w3-orange w3-small" ng-click="vm.copy(article)">
+              <i class="glyphicon glyphicon-copyright-mark"></i> コピー</button>
             <button class="w3-button w3-red w3-small" ng-click="vm.remove(article)">
               <i class="glyphicon glyphicon-trash"></i> 削除</button>
           </td>

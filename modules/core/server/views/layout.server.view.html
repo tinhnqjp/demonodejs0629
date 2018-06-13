@@ -16,13 +16,6 @@
 
   <!-- Application CSS Files -->
   {{#each cssFiles}}<link rel="stylesheet" href="/{{this}}">{{/each}}
-
-  <style>
-      .w3-bar-block .w3-bar-item {
-          padding: 16px;
-          font-weight: bold
-      }
-  </style>
 </head>
 
 <body class="ng-cloak">
@@ -49,7 +42,7 @@
 {{/if}}
 
   <!-- トップに戻るボタン -->
-  <button class="btn btn-info" id="moveTop"><span class="glyphicon glyphicon-arrow-up"></span></button>
+  <button class="w3-btn w3-ripple w3-blue" id="moveTop"><i class="fas fa-arrow-up"></i></button>
 
   <footer class="w3-container w3-theme">
       <p style="text-align:right;">Copyright © 2018 J建築検査センター（JAIC） All rights reserved.</p>

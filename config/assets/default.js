@@ -13,10 +13,10 @@ module.exports = {
         // endbower
         'public/common/css/w3.css',
         'public/common/css/w3-theme-teal.css',
-        'public/lib/font-awesome/web-fonts-with-css/css/fontawesome.css',
+        'public/lib/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css',
         'public/lib/angular-loading-bar/src/loading-bar.css',
-        'public/lib//ng-dialog/css/ngDialog.min.css',
-        'public/lib//ng-dialog/css/ngDialog-theme-default.min.css',
+        'public/lib/ng-dialog/css/ngDialog.css',
+        'public/lib/ng-dialog/css/ngDialog-theme-default.min.css',
         'public/common/css/common.css'
       ],
       js: [
@@ -38,7 +38,7 @@ module.exports = {
         'public/lib/angular-ui-sortable/sortable.min.js',
         'public/lib/underscore/underscore.js',
         'public/lib/angular-loading-bar/src/loading-bar.js',
-        'public/lib/ng-dialog/js/ngDialog.min.js'
+        'public/lib/ng-dialog/js/ngDialog.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

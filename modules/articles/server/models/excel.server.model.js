@@ -123,7 +123,6 @@ Excel.statics.createTableForm = function (workbook, listDataForm7, rowStart, tit
     // A ~ D
     if (item.item3) {
 
-      // console.log('​item3', item.id);
       if (item.rsp_item1 >= 0) {
         worksheet.mergeCells(mergeItem(colA, colA, item.rsp_item1, indexRow));
         setCell(worksheet, colA + indexRow, item.item1);
@@ -144,7 +143,6 @@ Excel.statics.createTableForm = function (workbook, listDataForm7, rowStart, tit
         setCell(worksheet, colD + indexRow, item.item4);
       }
     } else if (item.item2) {
-      // console.log('​item2', item.id);
       if (item.rsp_item1 >= 0) {
         worksheet.mergeCells(mergeItem(colA, colA, item.rsp_item1, indexRow));
         setCell(worksheet, colA + indexRow, item.item1);
@@ -160,7 +158,6 @@ Excel.statics.createTableForm = function (workbook, listDataForm7, rowStart, tit
         setCell(worksheet, colD + indexRow, item.item4);
       }
     } else if (item.item4) {
-      // console.log('​item4', item.id);
       if (item.rsp_item1 >= 0) {
         worksheet.mergeCells(mergeItem(colA, colC, item.rsp_item1, indexRow));
         setCell(worksheet, colA + indexRow, item.item1);
@@ -171,7 +168,6 @@ Excel.statics.createTableForm = function (workbook, listDataForm7, rowStart, tit
         setCell(worksheet, colD + indexRow, item.item4);
       }
     } else {
-      // console.log('else', indexRow);
       if (item.rsp_item1 >= 0) {
         worksheet.mergeCells(mergeItem(colA, colD, item.rsp_item1, indexRow));
         setCell(worksheet, colA + indexRow, item.item1);

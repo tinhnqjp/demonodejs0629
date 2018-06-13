@@ -2,10 +2,9 @@
 
 angular.module('core').controller('AppController', AppController);
 
-AppController.$inject = ['$scope', '$timeout', '$window', 'Authentication'];
-// AppController.$inject = ['$scope', '$timeout', '$window', 'Authentication'];
+AppController.$inject = ['$scope', '$timeout', '$window', 'Authentication', 'notifyService', 'ngDialog'];
 
-function AppController($scope, $timeout, $window, Authentication) {
+function AppController($scope, $timeout, $window, Authentication, notifyService, ngDialog) {
   $scope.Authentication = Authentication;
   $scope.handleShowConfirm = handleShowConfirm;
   $scope.handleShowDownload = handleShowDownload;
@@ -109,4 +108,5 @@ function AppController($scope, $timeout, $window, Authentication) {
     }
     return dataRoles;
   }
+
 }

@@ -22,7 +22,6 @@
     if ($location.search().err) {
       Notification.error({ message: $location.search().err });
     }
-console.log(vm.authentication.user);
     // If user is signed in then redirect back home
     if (vm.authentication.user && $location.path() === '/authentication/signin') {
       $location.path('/admin/articles');
