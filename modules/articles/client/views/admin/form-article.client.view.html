@@ -1,24 +1,30 @@
 <div class="w3-container">
   <h3>物件データ管理</h3>
-  <button type="submit" ng-click="vm.save(vm.form.propertyForm.$valid)" class="w3-button w3-green pull-right" id="btn_save_add">
-    <span class="glyphicon glyphicon-floppy-save"></span> 保存</a>
-  </button>
-  <a data-ui-sref="admin.articles.list" class="w3-button w3-orange pull-right mg15r">キャンセル</a>
-  <ol class="breadcrumb">
-    <li>
-      <a href="#">一覧</a>
-    </li>
-    <li class="active">物件登録</li>
-  </ol>
+  
+  <div class="w3-row">
+    <ol class="w3-col m6 l6 s12 breadcrumb">
+      <li>
+        <a href="#">一覧</a>
+      </li>
+      <li class="active">物件登録</li>
+    </ol>
+    <div class="w3-col m6 l6 s12">
+      <button type="submit" ng-click="vm.save(vm.form.articleForm.$valid)" class="w3-button w3-green pull-right" id="btn_save_add">
+        <span class="glyphicon glyphicon-floppy-save"></span> 保存</a>
+      </button>
+      <a data-ui-sref="admin.articles.list" class="w3-button w3-orange pull-right mg15r">キャンセル</a>
+    </div>
+  </div>
+  
   <hr>
   <!-- #コントロールボタン -->
   <!-- 入力Form -->
   <form name="vm.form.articleForm" ng-submit="vm.save(vm.form.articleForm.$valid)" novalidate>
     <div class="w3-section">
       <label class="w3-text-black">
-        <b>Title</b>
+        <b>件名</b>
       </label>
-      <input name="title" type="text" ng-model="vm.article.title" id="title" class="w3-input w3-border" placeholder="Title" required
+      <input name="title" type="text" ng-model="vm.article.title" id="title" class="w3-input w3-border" placeholder="件名" required
         autofocus>
       <div ng-messages="vm.form.articleForm.title.$error" role="alert">
         <p class="help-block error-text" ng-message="required">Article title is required.</p>
@@ -26,12 +32,9 @@
     </div>
     <div class="w3-section">
       <label class="w3-text-black">
-        <b>Content</b>
+        <b>内容</b>
       </label>
-      <textarea name="content" data-ng-model="vm.article.content" id="content" class="w3-input w3-border" cols="30" rows="10" placeholder="Content"></textarea>
-    </div>
-    <div class="w3-section">
-      <button type="submit" class="w3-btn w3-blue">{{vm.article._id ? 'Update' : 'Create'}}</button>
+      <textarea name="content" data-ng-model="vm.article.content" id="content" class="w3-input w3-border" cols="30" rows="10" placeholder="内容"></textarea>
     </div>
   </form>
   <!-- #入力Form -->

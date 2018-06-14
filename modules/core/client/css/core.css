@@ -42,8 +42,3 @@ a:hover .header-profile-image {
   display: inline;
 }
 
-@media (max-width: 992px) {
-  .w3-main {
-    margin-top: 40px;
-  }
-}

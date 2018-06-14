@@ -4,7 +4,8 @@
  * Module dependencies
  */
 var articlesPolicy = require('../policies/articles.server.policy'),
-  articles = require('../controllers/articles.server.controller');
+  articles = require('../controllers/articles.server.controller'),
+  xlsx = require('../controllers/xlsx.server.controller');
 
 module.exports = function (app) {
   // Articles collection routes
@@ -25,5 +26,7 @@ module.exports = function (app) {
   app.param('articleId', articles.articleByID);
 
   app.route('/api/form7').get(articles.form7);
+  app.route('/api/sheetjs').get(xlsx.sheetjs);
+  app.route('/api/sheetjs').post(xlsx.sheetjs);
   app.route('/api/printer').get(articles.printer);
 };

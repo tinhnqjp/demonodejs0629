@@ -12,7 +12,7 @@
   <hr>
   <form name="vm.form.searchForm" ng-submit="vm.search()" autocomplete="on" novalidate>
     <div class="w3-row">
-      <div class="w3-col s5 m4 l3">
+      <div class="w3-col s8 m4 l3">
         <input type="text" class="w3-input w3-border" id="keyword" ng-model="vm.keyword" placeholder="キーワード" autofocus>
       </div>
       <div class="w3-col s2 m1 l1">
@@ -25,10 +25,12 @@
     <hr>
   </form>
   <div class="table-responsive">
+    <!-- demo -->
+    <!-- demo -->
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th class="w3-theme w3-center">＃</th>
+          <th class="w3-theme w3-center w60">＃</th>
           <th class="w3-theme w3-center">受付日</th>
           <th class="w3-theme w3-center">事前受付番号</th>
           <th class="w3-theme w3-center">操作</th>
@@ -39,7 +41,7 @@
           <td class="w3-center">{{ vm.offset + $index + 1 }}</td>
           <td class="w3-left-align" data-ng-bind="article.title"></td>
           <td class="w3-center" data-ng-bind="article.created | date:'yyyy/MM/dd'"></td>
-          <td  class="w3-center" style="width: 270px">
+          <td class="w3-center" style="width: 270px">
             <button class="w3-button w3-blue w3-small" data-ui-sref="admin.articles.edit({articleId: article._id})">
               <i class="glyphicon glyphicon-pencil"></i> 編集</button>
             <button class="w3-button w3-orange w3-small" ng-click="vm.copy(article)">

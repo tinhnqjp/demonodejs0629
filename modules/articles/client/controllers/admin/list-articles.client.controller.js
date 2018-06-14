@@ -13,12 +13,13 @@
     vm.pageSize = 5;
     vm.offset;
     vm.articles = [];
+    
     initData();
 
     function initData() {
       vm.offset = (vm.currentPage - 1) * vm.pageSize;
       var input = { page: vm.currentPage, limit: vm.pageSize, keyword: vm.keyword };
-      console.log(input);
+      // console.log(input);
       ArticlesService.get(input, function (output) {
         vm.articles = output.laws;
         vm.totalItems = output.total;
