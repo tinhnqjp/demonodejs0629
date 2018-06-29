@@ -50,7 +50,7 @@ exports.excelandpdf = function (req, res) {
       return workbook.xlsx.readFile(templateFilePath);
     })
     .then(function (dataForm7) {
-      var query_from = ' FROM v_nice_property_info_1';
+      var query_from = ' FROM nice_property_info_1';
       var query_total = 'SELECT count(*) as total' + query_from;
       return mysqlSelect(query_total);
     })
