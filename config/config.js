@@ -126,11 +126,13 @@ var initGlobalConfigFolders = function (config, assets) {
   // Appending files
   config.folders = {
     server: {},
-    client: {}
+    client: {},
+    data: {}
   };
 
   // Setting globbed client paths
   config.folders.client = getGlobbedPaths(path.join(process.cwd(), 'modules/*/client/'), process.cwd().replace(new RegExp(/\\/g), '/'));
+  config.folders.data = getGlobbedPaths(path.join(process.cwd(), 'public/'), process.cwd().replace(new RegExp(/\\/g), '/'));
 };
 
 /**

@@ -65,7 +65,8 @@ module.exports = {
       'modules/**/*/img/**/*.svg'
     ],
     views: ['modules/*/client/views/**/*.html'],
-    templates: ['build/templates.js']
+    templates: ['build/templates.js'],
+    data: ['public/data/*']
   },
   server: {
     gulpConfig: ['gulpfile.js'],

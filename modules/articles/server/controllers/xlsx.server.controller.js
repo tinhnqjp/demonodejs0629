@@ -27,9 +27,9 @@ exports.excelandpdf = function (req, res) {
   console.log(json);
   var name = Date.now();
   // init
-  const templateFilePath = 'public/data/template.xlsx';
-  const outputExcelFileName = 'public/data/excel/' + name.toString() + '.xlsx';
-  const outputFdfFileName = 'public/data/excel/' + name.toString() + '.pdf';
+  const templateFilePath = 'modules/articles/client/data/template.xlsx';
+  const outputExcelFileName = 'modules/articles/client/data/excel/' + name.toString() + '.xlsx';
+  const outputFdfFileName = 'modules/articles/client/data/pdf/' + name.toString() + '.pdf';
   var workbook = new ExcelJs.Workbook();
   var listDataForm7,
     listTable1,
