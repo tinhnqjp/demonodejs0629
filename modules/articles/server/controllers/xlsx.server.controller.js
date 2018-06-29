@@ -104,13 +104,24 @@ exports.excelandpdf = function (req, res) {
       return workbook.xlsx.writeFile(outputExcelFileName);
     })
     .then(function () {
-      var unoconv = require('unoconv');
-      unoconv.convert(outputExcelFileName, 'pdf', function (err, result) {
-        // result is returned as a Buffer
-        fs.writeFile(outputFdfFileName, result);
+      return new Promise(function (resolve, reject) {
+        var converter = require('office-converter')();
+        converter.generatePdf(outputExcelFileName, function (err, result) {
+          if (err) {
+            reject(err);
+          }
+          resolve(result);
+          // console.error('**ERROR**', err, result);
+          // if (result.status === 0) {
+          //   console.log('Output File located at ' + result.outputFile);
+          // }
+
+        });
       });
     })
-    .then(function () {
+    .then(function (result) {
+      console.log('Output File located at ' + result);
+
       res.json({ file: [outputExcelFileName, outputFdfFileName] });
     })
     .catch(function (error) {
