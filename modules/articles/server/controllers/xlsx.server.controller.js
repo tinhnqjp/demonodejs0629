@@ -105,7 +105,7 @@ exports.excelandpdf = function (req, res) {
     })
     .then(function () {
       var unoconv = require('unoconv');
-      unoconv.convert(outputExcelFileName, 'pdf', {}, function (err, result) {
+      unoconv.convert(outputExcelFileName, 'pdf', function (err, result) {
         // result is returned as a Buffer
         fs.writeFile(outputFdfFileName, result);
       });
