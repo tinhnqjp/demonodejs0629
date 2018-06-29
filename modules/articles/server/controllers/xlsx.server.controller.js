@@ -104,14 +104,14 @@ exports.excelandpdf = function (req, res) {
       return workbook.xlsx.writeFile(outputExcelFileName);
     })
     .then(function () {
-      // var unoconv = require('unoconv');
-      // unoconv.convert(outputExcelFileName, 'pdf', {}, function (err, result) {
-      // result is returned as a Buffer
-      // fs.writeFile(outputFdfFileName, result);
-      // });
+      var unoconv = require('unoconv');
+      unoconv.convert(outputExcelFileName, 'pdf', {}, function (err, result) {
+        // result is returned as a Buffer
+        fs.writeFile(outputFdfFileName, result);
+      });
     })
     .then(function () {
-      res.json({ file: outputExcelFileName });
+      res.json({ file: [outputExcelFileName, outputFdfFileName] });
     })
     .catch(function (error) {
       console.error('**ERROR**', error);
