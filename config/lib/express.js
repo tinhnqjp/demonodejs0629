@@ -166,10 +166,6 @@ module.exports.initModulesClientRoutes = function (app) {
   config.folders.client.forEach(function (staticPath) {
     app.use(staticPath, express.static(path.resolve('./' + staticPath)));
   });
-
-  config.folders.data.forEach(function (staticPath) {
-    app.use(staticPath, express.static(path.resolve('./' + staticPath)));
-  });
 };
 
 /**
