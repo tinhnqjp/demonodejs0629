@@ -111,9 +111,9 @@ exports.excelandpdf = function (req, res) {
           if (err) {
             reject(err);
           }
-          fs.rename(result.outputFile, outputFdfFileName);
-
-          resolve(outputFdfFileName);
+          outputFdfFileName = result.outputFile;
+          // fs.rename(result.outputFile, outputFdfFileName);
+          resolve();
           // console.error('**ERROR**', err, result);
           // if (result.status === 0) {
           //   console.log('Output File located at ' + result.outputFile);
