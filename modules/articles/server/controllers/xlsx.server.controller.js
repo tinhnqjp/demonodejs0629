@@ -29,6 +29,7 @@ exports.excelandpdf = function (req, res) {
   // init
   const templateFilePath = 'modules/articles/client/data/template.xlsx';
   const outputExcelFileName = 'modules/articles/client/data/excel/' + name.toString() + '.xlsx';
+  const outputExcelFileNameTmp = 'modules/articles/client/data/excel/' + name.toString() + '.pdf';
   const outputFdfFileName = 'modules/articles/client/data/pdf/' + name.toString() + '.pdf';
   var workbook = new ExcelJs.Workbook();
   var listDataForm7,
@@ -110,7 +111,9 @@ exports.excelandpdf = function (req, res) {
           if (err) {
             reject(err);
           }
-          resolve(result);
+          fs.rename(result.outputFile, outputFdfFileName);
+
+          resolve(outputFdfFileName);
           // console.error('**ERROR**', err, result);
           // if (result.status === 0) {
           //   console.log('Output File located at ' + result.outputFile);
@@ -119,10 +122,8 @@ exports.excelandpdf = function (req, res) {
         });
       });
     })
-    .then(function (result) {
-      console.log('Output File located at ' + result);
-
-      res.json({ file: [outputExcelFileName, outputFdfFileName], result: result });
+    .then(function () {
+      res.json({ file: [outputExcelFileName, outputFdfFileName] });
     })
     .catch(function (error) {
       console.error('**ERROR**', error);
