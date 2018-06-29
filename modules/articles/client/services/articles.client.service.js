@@ -56,6 +56,9 @@
     this.copy = function (articleId) {
       return $http.post('/api/articles/' + articleId + '/copy', null, { ignoreLoadingBar: true });
     };
+    this.download = function (json) {
+      return $http.post('/api/excelandpdf', json, { ignoreLoadingBar: true });
+    };
     return this;
   }
 

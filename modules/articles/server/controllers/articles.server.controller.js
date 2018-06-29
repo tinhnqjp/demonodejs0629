@@ -11,6 +11,7 @@ var path = require('path'),
   Excel = mongoose.model('Excel'),
   MasterCheckSheetForm7 = mongoose.model('MasterCheckSheetForm7'),
   ExcelJs = require('exceljs'),
+  gm = require('gm'),
   XLSXChart = require('xlsx-chart'),
   ChartjsNode = require('chartjs-node'),
   _ = require('lodash'),
@@ -116,10 +117,12 @@ exports.list = function (req, res) {
   var condition = {};
   if (keyword) {
     var regex = new RegExp(keyword.trim(), 'i');
-    condition = { $or: [
-      { 'title': regex },
-      { 'content': regex }
-    ] };
+    condition = {
+      $or: [
+        { 'title': regex },
+        { 'content': regex }
+      ]
+    };
   }
 
   Article.find(condition)
@@ -183,6 +186,7 @@ exports.form7 = function (req, res) {
   // init
   const templateFilePath = 'public/data/template.xlsx';
   const outputFileName = 'public/data/out.xlsx';
+  const outputFileNamePdf = 'public/data/out.pdf';
   const logoFileName = 'public/data/logo.png';
   const chartFileName = 'public/data/chart.xlsx';
   var workbook = new ExcelJs.Workbook();
@@ -191,7 +195,7 @@ exports.form7 = function (req, res) {
     listTable2,
     listTable3,
     listTable4;
-
+  var workbook2 = new ExcelJs.Workbook();
   // process
   MasterCheckSheetForm7.getTable()
     .then(function (dataForm7) {
@@ -257,24 +261,116 @@ exports.form7 = function (req, res) {
       //   array.push(_random);
       // }
 
-      var data = {
-        labels: ['red', 'orange', 'yellow', 'green', 'blue'],
-        datasets: [{
-          label: 'Compras',
-          backgroundColor: ['red', 'orange', 'yellow', 'green', 'blue'],
-          borderColor: 'rgba(255,99,132,1)',
-          borderWidth: 1,
-          data: [random(), random(), random(), random(), random()]
-        }
-        ]
-      };
+      // var data = {
+      //   labels: ['red', 'orange', 'yellow', 'green', 'blue'],
+      //   datasets: [{
+      //     label: 'Compras',
+      //     backgroundColor: ['red', 'orange', 'yellow', 'green', 'blue'],
+      //     borderColor: 'rgba(255,99,132,1)',
+      //     borderWidth: 1,
+      //     data: [random(), random(), random(), random(), random()]
+      //   }
+      //   ]
+      // };
       // random data
 
-      return Chart.exportChart(data);
+      // return Chart.exportChart(data);
+      return Chart.exportChart();
     })
     .then(function (imagePath) {
       var worksheet = workbook.getWorksheet('Template');
       // worksheet.addImage(Excel.image(imagePath, workbook), 'B3:H8');
+
+      // return workbook.xlsx.writeFile(outputFileNamePdf);
+      // return workbook.xlsx.writeBuffer();
+    })
+    .then(function (resultBuffer) {
+      var unoconv = require('unoconv');
+
+      // unoconv.convert(templateFilePath, 'pdf', {}, function (err, result) {
+      //   // result is returned as a Buffer
+      //   fs.writeFile(outputFileNamePdf, result);
+      // });
+
+      // var converter = require('office-converter')();
+      // converter.generatePdf(templateFilePath, function (err, result) {
+      //   console.log(err);
+      //   console.log(result);
+      //   // Process result if no error
+      //   // if (result.status === 0) {
+      //   //   console.log('Output File located at ' + result.outputFile);
+      //   // }
+      // });
+      // converter.generateHtml(templateFilePath, function (err, result) {
+      //   // Process result if no error
+      //   if (result.status === 0) {
+      //     console.log('Output File located at ' + result.outputFile);
+      //   }
+      // });
+    })
+    .catch(function (error) {
+
+      console.error('**ERROR**', error);
+      return res.status(422).send({
+        message: error
+      });
+    });
+};
+
+function random() {
+  return Math.floor((Math.random() * 10) + 1);
+}
+
+exports.insertImage = function (req, res) {
+  // const templateFilePath = 'public/data/現行サイト商品リスト.xlsx';
+  const templateFilePath = 'public/data/newfile.xlsx';
+  const outputFileName = 'public/data/out.xlsx';
+  var workbook = new ExcelJs.Workbook();
+
+  workbook.xlsx.readFile(templateFilePath)
+    .then(function () {
+      var worksheet = workbook.getWorksheet('products20180615111749');
+      var imagePath = 'public/data/save_image/';
+      var thumbnailPath = 'public/data/save_image_thumbnail/';
+      var dobCol = worksheet.getColumn('AA');
+      var promises = [];
+
+      dobCol.eachCell(function (cell, rowNumber) {
+        // if (!cell.value) {
+        //   // // console.log(rowNumber);
+        //   // var row = worksheet.getRow(rowNumber);
+        //   // // row.hidden = true;
+        //   // worksheet.spliceRows(rowNumber, 1, row);
+        //   // // promises.push(rowNumber);
+        // }
+        //   // promises.push(addImageExcel(imagePath, thumbnailPath, cell.value, rowNumber, workbook));
+        // } else {
+        //   promises.push(;);
+        // }
+        if (cell.value) {
+          promises.push(addImageExcel(imagePath, thumbnailPath, cell.value, rowNumber, workbook));
+        }
+      });
+      // console.log(promises);
+      // promises.forEach(value => {
+      //   worksheet.spliceRows(value, 1);
+      // });
+      // var dobCol = worksheet.getColumn('AF');
+      // dobCol.eachCell(function (cell, rowNumber) {
+      //   // if (rowNumber) {
+      //   //   console.log(cell.value);
+      //   // }
+      //   if (rowNumber === 2) {
+      //     console.log(cell.value, cell);
+      //   }
+
+      // });
+
+      return Promise.all(promises);
+    })
+    .then(function () {
+      // var imagePath = 'public/data/save_image/MG_3153_500.jpg';
+      // worksheet.addImage(Excel.image(imagePath, workbook), 'AK2:AK2');
 
       return workbook.xlsx.writeFile(outputFileName);
     })
@@ -294,6 +390,48 @@ exports.form7 = function (req, res) {
     });
 };
 
-function random() {
-  return Math.floor((Math.random() * 10) + 1);
+function createThumbnail(imageNamePath, thumbnailNamePath) {
+  return new Promise(function (resolve, reject) {
+    gm(imageNamePath)
+      .resize(100, 100)
+      .noProfile()
+      .write(thumbnailNamePath, function (err) {
+        if (err) {
+          reject(err);
+        }
+        resolve(thumbnailNamePath);
+      });
+  });
+}
+
+function addImageExcel(imagePath, thumbnailPath, value, rowNumber, workbook) {
+  return new Promise(function (resolve, reject) {
+    var imageNamePath = imagePath + value;
+    var thumbnailNamePath = thumbnailPath + value;
+    if (fs.existsSync(imageNamePath)) {
+      var worksheet = workbook.getWorksheet('products20180615111749');
+      createThumbnail(imageNamePath, thumbnailNamePath)
+        .then(function (path) {
+          // write excel
+          var local = 'AK' + rowNumber + ':AK' + rowNumber;
+          worksheet.addImage(Excel.image(imageNamePath, workbook), local);
+        })
+        .then(function () {
+          resolve(true);
+        })
+        .catch(function (err) {
+          reject(err);
+        });
+    } else {
+      resolve(true);
+    }
+  });
+}
+
+function removeRowExcel(rowNumber, workbook) {
+  return new Promise(function (resolve, reject) {
+    var worksheet = workbook.getWorksheet('products20180615111749');
+    worksheet.spliceRows(rowNumber, 1);
+    resolve(true);
+  });
 }

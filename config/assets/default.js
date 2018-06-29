@@ -33,6 +33,7 @@ module.exports = {
         'public/lib/angular-ui-router/release/angular-ui-router.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         // endbower
+        'public/lib/checklist-model/checklist-model.js',
         'public/common/js/common.js',
         'public/lib/jquery-ui/jquery-ui.min.js',
         'public/lib/angular-ui-sortable/sortable.min.js',

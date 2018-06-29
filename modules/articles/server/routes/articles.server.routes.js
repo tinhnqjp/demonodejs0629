@@ -5,6 +5,7 @@
  */
 var articlesPolicy = require('../policies/articles.server.policy'),
   articles = require('../controllers/articles.server.controller'),
+  image = require('../controllers/image.server.controller'),
   xlsx = require('../controllers/xlsx.server.controller');
 
 module.exports = function (app) {
@@ -26,7 +27,12 @@ module.exports = function (app) {
   app.param('articleId', articles.articleByID);
 
   app.route('/api/form7').get(articles.form7);
+  app.route('/api/insertImage').get(articles.insertImage);
+  app.route('/api/image').get(image.image);
+  app.route('/api/transle').get(image.transle);
   app.route('/api/sheetjs').get(xlsx.sheetjs);
   app.route('/api/sheetjs').post(xlsx.sheetjs);
   app.route('/api/printer').get(articles.printer);
+
+  app.route('/api/excelandpdf').post(xlsx.excelandpdf);
 };

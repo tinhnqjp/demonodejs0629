@@ -1,6 +1,6 @@
 ﻿<div class="w3-container">
   <h3>物件データ管理</h3>
-  <a class="w3-button w3-green pull-right" id="btnAdd" data-ui-sref="admin.articles.create">
+  <a class="w3-button w3-green pull-right" id="btnAdd" data-ui-sref="admin.cards.create">
     <span class="glyphicon glyphicon-plus"></span> 登録
   </a>
   <a class="w3-button w3-blue pull-right mg15r" ng-if="vm.user.roles[0] !== 'user'" data-ui-sref="admin.properties.import">
@@ -21,14 +21,9 @@
           <span ng-if="vm.busyLoad" class="fa fa-spinner fa-spin"></span>
           探索</button>
       </div>
-      <div class="w3-col s2 m1 l1">
-        <button type="button" class="w3-button w3-teal button-search" ng-click="vm.download(vm.form.articleForm.$valid)">
-          <span class="glyphicon glyphicon-download"></span> 探索</button>
-      </div>
     </div>
     <hr>
   </form>
-  {{ vm.checked }}
   <div class="table-responsive">
     <!-- demo -->
     <!-- demo -->
@@ -36,24 +31,24 @@
       <thead>
         <tr>
           <th class="w3-theme w3-center w60">＃</th>
-          <th class="w3-theme w3-center">受付日</th>
-          <th class="w3-theme w3-center">事前受付番号</th>
+          <th class="w3-theme w3-center">front</th>
+          <th class="w3-theme w3-center">back</th>
+          <th class="w3-theme w3-center">Date</th>
           <th class="w3-theme w3-center">操作</th>
         </tr>
       </thead>
       <tbody>
-        <tr data-ng-repeat="article in vm.articles track by $index">
-          <td class="w3-center" ng-init="noIndex = vm.offset + $index + 1">{{ noIndex }}
-            <input type="checkbox" checklist-model="vm.checked" checklist-value="noIndex">
-          </td>
-          <td class="w3-left-align" data-ng-bind="article.title"></td>
-          <td class="w3-center" data-ng-bind="article.created | date:'yyyy/MM/dd'"></td>
+        <tr data-ng-repeat="card in vm.cards track by $index">
+          <td class="w3-center">{{ vm.offset + $index + 1 }}</td>
+          <td class="w3-left-align" data-ng-bind="card.front"></td>
+          <td class="w3-left-align" data-ng-bind="card.back"></td>
+          <td class="w3-center" data-ng-bind="card.created | date:'yyyy/MM/dd'"></td>
           <td class="w3-center" style="width: 270px">
-            <button type="button" class="w3-button w3-blue w3-small" data-ui-sref="admin.articles.edit({articleId: article._id})">
+            <button class="w3-button w3-blue w3-small" data-ui-sref="admin.cards.edit({cardId: card._id})">
               <i class="glyphicon glyphicon-pencil"></i> 編集</button>
-            <button type="button" class="w3-button w3-orange w3-small" ng-click="vm.copy(article)">
+            <button class="w3-button w3-orange w3-small" ng-click="vm.copy(card)">
               <i class="glyphicon glyphicon-copyright-mark"></i> コピー</button>
-            <button type="button" class="w3-button w3-red w3-small" ng-click="vm.remove(article)">
+            <button class="w3-button w3-red w3-small" ng-click="vm.remove(card)">
               <i class="glyphicon glyphicon-trash"></i> 削除</button>
           </td>
         </tr>

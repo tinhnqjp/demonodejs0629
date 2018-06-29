@@ -1,0 +1,51 @@
+<div class="w3-container">
+  <h3>物件データ管理</h3>
+  
+  <div class="w3-row">
+    <ol class="w3-col m6 l6 s12 breadcrumb">
+      <li>
+        <a href="#">一覧</a>
+      </li>
+      <li class="active">物件登録</li>
+    </ol>
+    <div class="w3-col m6 l6 s12">
+      <button type="submit" ng-click="vm.save(vm.form.cardForm.$valid)" class="w3-button w3-green pull-right" id="btn_save_add">
+        <span class="glyphicon glyphicon-floppy-save"></span> 保存</a>
+      </button>
+      <a data-ui-sref="admin.cards.list" class="w3-button w3-orange pull-right mg15r">キャンセル</a>
+    </div>
+  </div>
+  
+  <hr>
+  <!-- #コントロールボタン -->
+  <!-- 入力Form -->
+  <form name="vm.form.cardForm" ng-submit="vm.save(vm.form.cardForm.$valid)" novalidate>
+    <div class="w3-section">
+      <label class="w3-text-black">
+        <b>Card title</b>
+      </label>
+      <input name="title" type="text" ng-model="vm.card.title" id="title" class="w3-input w3-border" placeholder="Card Name" autofocus>
+    </div>
+    <div class="w3-section">
+      <label class="w3-text-black">
+        <b>Content</b>
+      </label>
+      <textarea name="back" data-ng-model="vm.card.content" id="back" class="w3-input w3-border" cols="30" rows="10" placeholder="content">夢	ゆめ
+        giấc mơ
+        MỘNG
+        
+        夢中	むちゅう
+        mơ mộng, say sưa, miệt mài
+        MỘNG TRUNG
+        
+        専門	せんもん
+        chuyên môn
+        CHUYÊN MÔN
+        
+        専用	せんよう
+        chuyên dụng
+        CHUYÊN DỤNG</textarea>
+    </div>
+  </form>
+  <!-- #入力Form -->
+</div>
