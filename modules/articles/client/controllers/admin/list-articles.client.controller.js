@@ -13,6 +13,7 @@
     vm.pageSize = 5;
     vm.offset;
     vm.checked = [];
+    vm.files = [];
     vm.articles = [];
     initData();
 
@@ -74,6 +75,7 @@
       var json = { table: vm.checked };
       console.log(json);
       ArticlesApi.download(json).then((result) => {
+        vm.files = result.data.file;
         console.log(result);
       }).catch((err) => {
         console.log(err);
