@@ -122,7 +122,7 @@ exports.excelandpdf = function (req, res) {
     .then(function (result) {
       console.log('Output File located at ' + result);
 
-      res.json({ file: [outputExcelFileName, outputFdfFileName] });
+      res.json({ file: [outputExcelFileName, outputFdfFileName], result: result });
     })
     .catch(function (error) {
       console.error('**ERROR**', error);
