@@ -9,7 +9,6 @@ var path = require('path'),
   fs = require('fs'),
   MasterCheckSheetForm7 = mongoose.model('MasterCheckSheetForm7'),
   _ = require('lodash'),
-  XLSX = require('XLSX'),
   ExcelJs = require('exceljs'),
   Excel = mongoose.model('Excel'),
   formidable = require('formidable'),
@@ -20,12 +19,6 @@ var path = require('path'),
  */
 exports.sheetjs = function (req, res) {
   // init
-  const templateFilePath = 'public/data/template2.xlsx';
-  const outputFileName = 'public/excel/out.xlsx';
-  /* read the file */
-  var workbook = XLSX.readFile(templateFilePath); // parse the file
-  XLSX.writeFile(workbook, outputFileName);
-
   res.send({});
 };
 
