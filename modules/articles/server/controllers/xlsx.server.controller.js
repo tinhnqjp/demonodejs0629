@@ -111,9 +111,8 @@ exports.excelandpdf = function (req, res) {
           if (err) {
             reject(err);
           }
-          outputFdfFileName = result.outputFile;
           // fs.rename(result.outputFile, outputFdfFileName);
-          resolve();
+          resolve(result.outputFile);
           // console.error('**ERROR**', err, result);
           // if (result.status === 0) {
           //   console.log('Output File located at ' + result.outputFile);
@@ -122,8 +121,8 @@ exports.excelandpdf = function (req, res) {
         });
       });
     })
-    .then(function () {
-      res.json({ file: [outputExcelFileName, outputFdfFileName] });
+    .then(function (outputFile) {
+      res.json({ file: [outputExcelFileName, outputFile] });
     })
     .catch(function (error) {
       console.error('**ERROR**', error);
